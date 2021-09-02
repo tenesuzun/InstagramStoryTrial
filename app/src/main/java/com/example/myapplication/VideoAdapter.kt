@@ -3,63 +3,55 @@ package com.example.myapplication
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
-import android.widget.TextView
-import android.widget.VideoView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.myapplication.databinding.MediaContainerItemBinding
 
-class VideoAdapter(private val videoItems: MutableList<VideoItem>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class VideoAdapter(private val videosList: MutableList<VideoItem>): RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
-    inner class ImageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val videoView: VideoView = itemView.findViewById(R.id.reelsVideoView)
-        private val textVideoTitle: TextView = itemView.findViewById(R.id.textMediaTitle)
-        private val textImageDescription: TextView = itemView.findViewById(R.id.textMediaDescription)
-        private val videoProgressBar: ProgressBar = itemView.findViewById(R.id.reelsProgressBar)
-
-        fun setVideoData(videoItem: VideoItem){
-            textVideoTitle.text = videoItem.videoTitle
-            textImageDescription.text = videoItem.videoDescription
-            videoView.setVideoPath(videoItem.videoPath)
-            videoView.setOnPreparedListener {
-                videoProgressBar.visibility = View.GONE
-                it.start()
-
-                val videoRatio: Float = it.videoHeight.toFloat() / it.videoHeight.toFloat()
-                val screenRatio: Float = videoView.width.toFloat() / videoView.height.toFloat()
-                val scale: Float = videoRatio / screenRatio
-                if(scale >= 1f) {
-                    videoView.scaleX = scale
-                } else {
-                    videoView.scaleY = 1f / scale
-                }
-            }
-            videoView.setOnCompletionListener{
-                it.start()
-            }
-        }
-    }
+    lateinit var binding: MediaContainerItemBinding
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return ImageViewHolder(
-            LayoutInflater.from(parent.context).inflate(
-                R.layout.media_container_item,
-                parent,
-                false
-            )
+        val binding = MediaContainerItemBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
         )
+        return ViewPagerViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when (holder){
-            is ImageViewHolder -> {
-                holder.setVideoData(videoItems[position])
+        when(holder){
+            is ViewPagerViewHolder -> {
+                holder.setVideoData(videosList[position])
             }
         }
     }
 
     override fun getItemCount(): Int {
-        return videoItems.size
+        return videosList.size
     }
 
+    inner class ViewPagerViewHolder(binding: MediaContainerItemBinding): RecyclerView.ViewHolder(binding.root){
+        fun setVideoData(videoItem: VideoItem){
+            binding.textMediaTitle.text = videoItem.videoTitle
+            binding.textMediaDescription.text = videoItem.videoDescription
+            binding.reelsVideoView.setVideoPath(videoItem.videoPath)
+            binding.reelsVideoView.setOnPreparedListener {
+                binding.reelsProgressBar.visibility = View.GONE
+                it.start()
 
+                val videoRatio: Float = it.videoHeight.toFloat() / it.videoHeight.toFloat()
+                val screenRatio: Float = binding.reelsVideoView.width.toFloat() / binding.reelsVideoView.height.toFloat()
+                val scale: Float = videoRatio / screenRatio
+                if(scale >= 1f) {
+                    binding.reelsVideoView.scaleX = scale
+                } else {
+                    binding.reelsVideoView.scaleY = 1f / scale
+                }
+            }
+            binding.reelsVideoView.setOnCompletionListener{
+                it.start()
+            }
+        }
+    }
 }

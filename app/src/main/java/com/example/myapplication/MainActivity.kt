@@ -14,14 +14,14 @@ class MainActivity : AppCompatActivity() {
         val videoItems: MutableList<VideoItem> = ArrayList()
 
         val videoItemCelebration = VideoItem(
-            videoPath = "app/sampledata/first_video.mp4",
+            videoPath = "https://player.vimeo.com/66df9868-ed92-4c81-ba92-3df50b366770",
             videoTitle = "Yellow Flower",
             videoDescription = "This is a video of a yellow flower"
         )
         videoItems.add(videoItemCelebration)
 
         val videoItemParty = VideoItem(
-            videoPath = "app/sampledata/second_video",
+            videoPath = "https://player.vimeo.com/external/546875025.hd.mp4?s=8bbfa683c757a59a303740c74a5af7cc916970b5&amp;profile_id=175&amp;oauth2_token_id=57447761",
             videoTitle = "Off White Brush Paint",
             videoDescription = "Brush painted in slightly off white"
         )
@@ -56,6 +56,5 @@ class MainActivity : AppCompatActivity() {
         videoItems.add(videoItemSixthVideo)
 
         videosViewPager.adapter = VideoAdapter(videoItems)
-
     }
 }
