@@ -28,14 +28,14 @@ class MainActivity : AppCompatActivity() {
         videoItems.add(videoItemParty)
 
         val videoItemThirdVideo = VideoItem(
-            videoPath = "app/sampledata/third_video",
+            videoPath = "https://vod-progressive.akamaized.net/exp=1630603895~acl=%2Fvimeo-prod-skyfire-std-us%2F01%2F757%2F16%2F403787488%2F1727245276.mp4~hmac=d48c12ce8d5e92c3ba95fa8c5e5d5cc7ef4903b6c7054989490b8df9476c2cc5/vimeo-prod-skyfire-std-us/01/757/16/403787488/1727245276.mp4?filename=production+ID%3A4068409.mp4",
             videoTitle = "Painting board ",
             videoDescription = "You can see the hand painting the board with a brush"
         )
         videoItems.add(videoItemThirdVideo)
 
         val videoItemFourthVideo = VideoItem(
-            videoPath = "app/sampledata/fourth_video",
+            videoPath = "http://www.techslides.com/demos/sample-videos/small.mp4",
             videoTitle = "Mixed colors ",
             videoDescription = "Colors are mixed and spread on the surface of a puddle"
         )

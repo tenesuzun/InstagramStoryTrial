@@ -35,9 +35,10 @@ class VideoAdapter(private val videosList: MutableList<VideoItem>): RecyclerView
         fun setVideoData(videoItem: VideoItem){
             binding.textMediaTitle.text = videoItem.videoTitle
             binding.textMediaDescription.text = videoItem.videoDescription
-            binding.reelsVideoView.setVideoPath(videoItem.videoPath)
+//            binding.reelsVideoView.setVideoPath(videoItem.videoPath)
             binding.reelsVideoView.setOnPreparedListener {
                 binding.reelsProgressBar.visibility = View.GONE
+                it.setDataSource(videoItem.videoPath)
                 it.start()
 
                 val videoRatio: Float = it.videoHeight.toFloat() / it.videoHeight.toFloat()
