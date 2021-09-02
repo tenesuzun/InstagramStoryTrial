@@ -11,7 +11,7 @@ class VideoAdapter(private val videosList: MutableList<VideoItem>): RecyclerView
     lateinit var binding: MediaContainerItemBinding
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val binding = MediaContainerItemBinding.inflate(
+        binding = MediaContainerItemBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
