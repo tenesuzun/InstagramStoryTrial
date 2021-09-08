@@ -14,7 +14,7 @@ class VideoViewPager : AppCompatActivity() {
         val videoItems: MutableList<VideoItem> = ArrayList()
 
         val videoItemCelebration = VideoItem(
-            videoPath = "https://player.vimeo.com/66df9868-ed92-4c81-ba92-3df50b366770",
+            videoPath = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
             videoTitle = "Yellow Flower",
             videoDescription = "This is a video of a yellow flower"
         )

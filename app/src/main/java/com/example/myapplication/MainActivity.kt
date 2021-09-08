@@ -22,10 +22,12 @@ class MainActivity : AppCompatActivity() {
 
         binding.button.setOnClickListener{
             d("ImageBtn", "Image Btn is clicked")
+            startActivity(Intent(this, ImageViewPager::class.java))
         }
 
         binding.button3.setOnClickListener{
             d("MixBtn","Mix btn is clicked")
+            startActivity(Intent(this, MixViewPager::class.java))
         }
     }
 }

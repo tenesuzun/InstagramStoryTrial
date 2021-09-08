@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.databinding.MediaContainerItemBinding
+import android.net.Uri
 
 class VideoAdapter(private val videosList: MutableList<VideoItem>): RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
@@ -33,13 +34,21 @@ class VideoAdapter(private val videosList: MutableList<VideoItem>): RecyclerView
 
     inner class ViewPagerViewHolder(binding: MediaContainerItemBinding): RecyclerView.ViewHolder(binding.root){
         fun setVideoData(videoItem: VideoItem){
-            binding.textMediaTitle.text = videoItem.videoTitle
-            binding.textMediaDescription.text = videoItem.videoDescription
-//            binding.reelsVideoView.setVideoPath(videoItem.videoPath)
+
+            val mc = android.widget.MediaController(binding.root.context)
+            mc.setMediaPlayer(binding.reelsVideoView)
+            mc.setAnchorView(binding.reelsVideoView)
+
+            binding.reelsVideoView.setVideoURI(Uri.parse(videoItem.videoPath))
+            binding.reelsVideoView.setMediaController(mc)
+            binding.reelsVideoView.requestFocus()
+            binding.reelsVideoView.start()
+
+
             binding.reelsVideoView.setOnPreparedListener {
                 binding.reelsProgressBar.visibility = View.GONE
-                it.setDataSource(videoItem.videoPath)
-                it.start()
+                binding.textMediaTitle.text = videoItem.videoTitle
+                binding.textMediaDescription.text = videoItem.videoDescription
 
                 val videoRatio: Float = it.videoHeight.toFloat() / it.videoHeight.toFloat()
                 val screenRatio: Float = binding.reelsVideoView.width.toFloat() / binding.reelsVideoView.height.toFloat()
