@@ -13,6 +13,9 @@
         android:theme="@style/Theme.MyApplication"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ImageViewPager"
+            android:exported="true" />
+        <activity
             android:name=".VideoViewPager"
             android:exported="true" />
         <activity
