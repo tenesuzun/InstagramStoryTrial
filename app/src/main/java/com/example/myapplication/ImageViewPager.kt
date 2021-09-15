@@ -2,11 +2,18 @@ package com.example.myapplication
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.example.myapplication.databinding.ActivityImageViewPagerBinding
+import okhttp3.ResponseBody
+import org.json.JSONObject
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class ImageViewPager : AppCompatActivity() {
 
     private lateinit var binding: ActivityImageViewPagerBinding
+    private var imageItems: MutableList<ViewPagerItem.ImageItem> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -15,7 +22,7 @@ class ImageViewPager : AppCompatActivity() {
 
         val viewPagerAdapter = ViewPagerAdapter()
 
-        val imageItems: MutableList<ViewPagerItem.ImageItem> = ArrayList()
+        getApiResponse()
 
         imageItems.add(
             ViewPagerItem.ImageItem(
@@ -64,8 +71,33 @@ class ImageViewPager : AppCompatActivity() {
                 imageDescription = "This road could be best to drive through to collect some thoughts"
             )
         )
-
         viewPagerAdapter.items = imageItems
         binding.imagesViewPager.adapter = viewPagerAdapter
+    }
+
+    fun getImagesFromJsonObject(response: JSONObject){
+        imageItems.add(ViewPagerItem.ImageItem(
+            imagePath = response.get("primaryImage").toString(),
+            imageDescription = "Description",
+            imageTitle = "Title"
+        ))
+    }
+
+    private fun getApiResponse(){
+        RetrofitApi.retrofit.getFullResponse().enqueue(object: Callback<ResponseBody>{
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                when(response.code()){
+                    200 -> {
+                        JSONObject(response.body()!!.string())
+                        getImagesFromJsonObject(JSONObject(response.body()!!.string()))
+                    }else -> {
+                        Toast.makeText(binding.root.context,response.code().toString()+" "+ response.message(), Toast.LENGTH_LONG).show()
+                    }
+                }
+            }
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                Toast.makeText(binding.root.context,t.message,Toast.LENGTH_LONG).show()
+            }
+        })
     }
 }
