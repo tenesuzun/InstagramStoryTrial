@@ -19,7 +19,7 @@ class ImageViewPager : AppCompatActivity() {
 
         imageItems.add(
             ViewPagerItem.ImageItem(
-                imagePath = "https://images.pexels.com/photos/235986/pexels-photo-235986.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+                imagePath = "https://images.pexels.com/photos/9504478/pexels-photo-9504478.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=2&amp;w=500",
                 imageTitle = "Window on a wall",
                 imageDescription = "A window placed on wall with surface made of rock"
             )

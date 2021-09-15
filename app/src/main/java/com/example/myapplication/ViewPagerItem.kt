@@ -8,10 +8,10 @@ sealed class ViewPagerItem{
         var videoDescription: String
     ): ViewPagerItem()
 
-
     data class ImageItem(
         var imagePath: String,
         var imageTitle: String,
         var imageDescription: String
     ): ViewPagerItem()
 }
+

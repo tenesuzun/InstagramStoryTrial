@@ -2,16 +2,18 @@ package com.example.myapplication
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.viewpager2.widget.ViewPager2
+import com.example.myapplication.databinding.ActivityVideoViewPagerBinding
 
 class VideoViewPager : AppCompatActivity() {
+
+    private lateinit var binding: ActivityVideoViewPagerBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_video_view_pager)
+        binding = ActivityVideoViewPagerBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val videosViewPager: ViewPager2 = findViewById(R.id.videosViewPager)
         val videoAdapter = ViewPagerAdapter()
-
         val videoItems: MutableList<ViewPagerItem.VideoItem> = ArrayList()
 
         val videoItemCelebration = ViewPagerItem.VideoItem(
@@ -57,6 +59,6 @@ class VideoViewPager : AppCompatActivity() {
         videoItems.add(videoItemSixthVideo)
 
         videoAdapter.items = videoItems
-        videosViewPager.adapter = videoAdapter
+        binding.videosViewPager.adapter = videoAdapter
     }
 }
