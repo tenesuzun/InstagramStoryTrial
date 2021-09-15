@@ -2,6 +2,7 @@ package com.example.myapplication
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log.d
 import android.widget.Toast
 import com.example.myapplication.databinding.ActivityImageViewPagerBinding
 import okhttp3.ResponseBody
@@ -76,8 +77,10 @@ class ImageViewPager : AppCompatActivity() {
     }
 
     fun getImagesFromJsonObject(response: JSONObject){
+        val dataResponse = response.getString("data")
+        d("JSON_RESPONSE", dataResponse)
         imageItems.add(ViewPagerItem.ImageItem(
-            imagePath = response.get("primaryImage").toString(),
+            imagePath = response.getString("data"),
             imageDescription = "Description",
             imageTitle = "Title"
         ))
@@ -88,7 +91,6 @@ class ImageViewPager : AppCompatActivity() {
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                 when(response.code()){
                     200 -> {
-                        JSONObject(response.body()!!.string())
                         getImagesFromJsonObject(JSONObject(response.body()!!.string()))
                     }else -> {
                         Toast.makeText(binding.root.context,response.code().toString()+" "+ response.message(), Toast.LENGTH_LONG).show()
