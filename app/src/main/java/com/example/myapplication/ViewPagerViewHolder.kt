@@ -1,9 +1,7 @@
 package com.example.myapplication
 
 import android.net.Uri
-import android.provider.ContactsContract
 import android.view.View
-import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.bumptech.glide.Glide
@@ -45,7 +43,6 @@ sealed class ViewPagerViewHolder(binding: ViewBinding) : RecyclerView.ViewHolder
     class ImageViewHolder(private val binding: ImageContainerItemBinding): ViewPagerViewHolder(binding){
         fun setImageData(imageItem: ViewPagerItem.ImageItem){
             Glide.with(binding.root).load(Uri.parse(imageItem.imagePath)).into(binding.imageReelsImageView)
-//            binding.imageReelsImageView.setImageURI(imageItem.imagePath.toUri())
             binding.imageReelsImageDescription.text = imageItem.imageDescription
             binding.imageReelsImageTitle.text = imageItem.imageTitle
         }
