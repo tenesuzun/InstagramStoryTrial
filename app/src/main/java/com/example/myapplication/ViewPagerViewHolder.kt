@@ -15,7 +15,7 @@ sealed class ViewPagerViewHolder(binding: ViewBinding) : RecyclerView.ViewHolder
             mc.setMediaPlayer(binding.reelsVideoView)
             mc.setAnchorView(binding.reelsVideoView)
 
-            binding.reelsVideoView.setVideoURI(Uri.parse(videoItem.Url))
+            binding.reelsVideoView.setVideoURI(Uri.parse(videoItem.VideoUrl))
             binding.reelsVideoView.setMediaController(mc)
             binding.reelsVideoView.requestFocus()
             binding.reelsVideoView.start()
