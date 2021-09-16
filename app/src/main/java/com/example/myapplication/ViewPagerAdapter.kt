@@ -6,11 +6,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.databinding.ImageContainerItemBinding
 import com.example.myapplication.databinding.VideoContainerItemBinding
-import java.lang.IllegalArgumentException
+import kotlin.IllegalArgumentException
 
 class ViewPagerAdapter: RecyclerView.Adapter<ViewPagerViewHolder>(){
 
-    var items = listOf<ViewPagerItem>()
+    var items = listOf<Any>()
     @SuppressLint("NotifyDataSetChanged")
     set(value) {
         field = value
@@ -39,7 +39,7 @@ class ViewPagerAdapter: RecyclerView.Adapter<ViewPagerViewHolder>(){
 
     override fun onBindViewHolder(holder: ViewPagerViewHolder, position: Int) {
         when(holder){
-            is ViewPagerViewHolder.ImageViewHolder -> holder.setImageData(items[position] as ViewPagerItem.ImageItem)
+            is ViewPagerViewHolder.ImageViewHolder -> holder.setImageData(items[position] as Response)
             is ViewPagerViewHolder.VideoViewHolder -> holder.setVideoData(items[position] as ViewPagerItem.VideoItem)
         }
     }
@@ -48,8 +48,9 @@ class ViewPagerAdapter: RecyclerView.Adapter<ViewPagerViewHolder>(){
 
     override fun getItemViewType(position: Int): Int {
         return when(items[position]){
-            is ViewPagerItem.ImageItem -> R.layout.image_container_item
+            is Response -> R.layout.image_container_item
             is ViewPagerItem.VideoItem -> R.layout.video_container_item
+            else -> throw IllegalArgumentException("No layout for the item type ${items[position].javaClass}")
         }
     }
 }

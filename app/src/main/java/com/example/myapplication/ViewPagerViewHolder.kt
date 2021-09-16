@@ -41,10 +41,10 @@ sealed class ViewPagerViewHolder(binding: ViewBinding) : RecyclerView.ViewHolder
     }
 
     class ImageViewHolder(private val binding: ImageContainerItemBinding): ViewPagerViewHolder(binding){
-        fun setImageData(imageItem: ViewPagerItem.ImageItem){
-            Glide.with(binding.root).load(Uri.parse(imageItem.imagePath)).into(binding.imageReelsImageView)
-            binding.imageReelsImageDescription.text = imageItem.imageDescription
-            binding.imageReelsImageTitle.text = imageItem.imageTitle
+        fun setImageData(imageItem: Response){
+            Glide.with(binding.root).load(Uri.parse(imageItem.primaryImage)).into(binding.imageReelsImageView)
+            binding.imageReelsImageDescription.text = imageItem.Description
+            binding.imageReelsImageTitle.text = imageItem.Title
         }
     }
 }
