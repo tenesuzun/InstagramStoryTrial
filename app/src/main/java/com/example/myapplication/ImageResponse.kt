@@ -1,6 +1,6 @@
 package com.example.myapplication
 
-data class APIResponse(
+data class ImageResponse(
     val data : Data,
     val meta: Meta
 )

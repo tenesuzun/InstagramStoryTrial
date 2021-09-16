@@ -18,18 +18,18 @@ class ImageViewPager : AppCompatActivity() {
 
         val viewPagerAdapter = ViewPagerAdapter()
 
-        RetrofitApi.retrofit.getFullResponse().enqueue(object: Callback<APIResponse> {
-            override fun onResponse(call: Call<APIResponse>, response: retrofit2.Response<APIResponse>) {
+        RetrofitApi.retrofit.getFullResponse().enqueue(object: Callback<ImageResponse> {
+            override fun onResponse(call: Call<ImageResponse>, response: retrofit2.Response<ImageResponse>) {
                 when(response.code()){
                     200 -> {
                         viewPagerAdapter.items = response.body()!!.data.articles.Response.toMutableList()
                         binding.imagesViewPager.adapter = viewPagerAdapter
                     }else -> {
-                    Toast.makeText(binding.root.context,response.code().toString()+" "+ response.message(), Toast.LENGTH_LONG).show()
+                        Toast.makeText(binding.root.context,response.code().toString()+" "+ response.message(), Toast.LENGTH_LONG).show()
                     }
                 }
             }
-            override fun onFailure(call: Call<APIResponse>, t: Throwable) {
+            override fun onFailure(call: Call<ImageResponse>, t: Throwable) {
                 Toast.makeText(binding.root.context,t.message, Toast.LENGTH_LONG).show()
             }
         })

@@ -40,7 +40,7 @@ class ViewPagerAdapter: RecyclerView.Adapter<ViewPagerViewHolder>(){
     override fun onBindViewHolder(holder: ViewPagerViewHolder, position: Int) {
         when(holder){
             is ViewPagerViewHolder.ImageViewHolder -> holder.setImageData(items[position] as Response)
-            is ViewPagerViewHolder.VideoViewHolder -> holder.setVideoData(items[position] as ViewPagerItem.VideoItem)
+            is ViewPagerViewHolder.VideoViewHolder -> holder.setVideoData(items[position] as ResponsedVideo)
         }
     }
 
@@ -49,7 +49,7 @@ class ViewPagerAdapter: RecyclerView.Adapter<ViewPagerViewHolder>(){
     override fun getItemViewType(position: Int): Int {
         return when(items[position]){
             is Response -> R.layout.image_container_item
-            is ViewPagerItem.VideoItem -> R.layout.video_container_item
+            is ResponsedVideo -> R.layout.video_container_item
             else -> throw IllegalArgumentException("No layout for the item type ${items[position].javaClass}")
         }
     }

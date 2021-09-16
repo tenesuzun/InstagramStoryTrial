@@ -10,20 +10,20 @@ import com.example.myapplication.databinding.VideoContainerItemBinding
 
 sealed class ViewPagerViewHolder(binding: ViewBinding) : RecyclerView.ViewHolder(binding.root){
     class VideoViewHolder(private val binding: VideoContainerItemBinding): ViewPagerViewHolder(binding){
-        fun setVideoData(videoItem: ViewPagerItem.VideoItem){
+        fun setVideoData(videoItem: ResponsedVideo){
             val mc = android.widget.MediaController(binding.root.context)
             mc.setMediaPlayer(binding.reelsVideoView)
             mc.setAnchorView(binding.reelsVideoView)
 
-            binding.reelsVideoView.setVideoURI(Uri.parse(videoItem.videoPath))
+            binding.reelsVideoView.setVideoURI(Uri.parse(videoItem.Url))
             binding.reelsVideoView.setMediaController(mc)
             binding.reelsVideoView.requestFocus()
             binding.reelsVideoView.start()
 
             binding.reelsVideoView.setOnPreparedListener {
                 binding.reelsProgressBar.visibility = View.GONE
-                binding.textMediaTitle.text = videoItem.videoTitle
-                binding.textMediaDescription.text = videoItem.videoDescription
+                binding.textMediaTitle.text = videoItem.TitleShort
+                binding.textMediaDescription.text = videoItem.Description
 
                 val videoRatio: Float = it.videoHeight.toFloat() / it.videoHeight.toFloat()
                 val screenRatio: Float = binding.reelsVideoView.width.toFloat() / binding.reelsVideoView.height.toFloat()
