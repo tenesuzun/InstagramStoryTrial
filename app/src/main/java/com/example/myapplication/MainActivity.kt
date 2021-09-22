@@ -15,6 +15,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        RetrofitApi.setImagesFromAPI()
+        RetrofitApi.setVideosFromAPI()
+
         binding.button2.setOnClickListener{
             d("VideoBtn","Video Btn is clicked")
             startActivity(Intent(this, VideoViewPager::class.java))
